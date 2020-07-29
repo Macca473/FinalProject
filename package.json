@@ -2,7 +2,7 @@
     "name": "finalproj",
     "scripts": {
       "start": "cd app && npm run start",
-      "install": "cd app && npm install",
+      "install": "cd app && npm install"
     }
   }
   
