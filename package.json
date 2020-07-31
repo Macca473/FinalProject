@@ -1,7 +1,7 @@
 {
     "name": "finalproj",
     "scripts": {
-      "start": "cd app && npm run start",
+      "start": "cd app && npm run",
       "install": "cd app && npm install"
     }
   }
