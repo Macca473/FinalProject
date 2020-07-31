@@ -7,20 +7,21 @@ const { Sequelize, Model, DataTypes } = require('sequelize');
 // var env = process.env.NODE_ENV || "development";
 // var config = require(__dirname + "/../config/config.json")[env];
 // const newbook = require('../server.js');
-// console.log("newbook in cont: " + newbook)
+// console.log("newbook in cont: " + newbook);
+const DATABASE_URL = 'postgres://mlijmmhvjxijve:d985111fbfd3e10d5395527fd0c95c34718008f5068fe9f9c98f087aba35ea31@ec2-34-225-162-157.compute-1.amazonaws.com:5432/d3nup472i70sq8'
 var db = {};
 
 // let createobj = require()
 
-// if (config.use_env_variable) {
-//   var sequelize = new Sequelize(process.env[config.use_env_variable]);
-// } else {
+if (config.use_env_variable) {
+  var sequelize = new Sequelize(process.env.DATABASE_URL);
+} else {
   var sequelize = new Sequelize('finalprojstore_db', 'root', 'Ss17091997', {
     host: 'localhost',
     port: '5000',
     dialect:'mysql'
   })
-// };
+};
 
 
 

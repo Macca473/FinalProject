@@ -1,7 +1,7 @@
 
-# C.O.S.E
+# C.O.S.S
 
-Cheeky Online Store Simulator
+Cheeky Online Store Sim
 
 ------------------
 
@@ -15,7 +15,7 @@ Cheeky Online Store Simulator
 
 ## :large_blue_diamond:Introduction 
 
-This repo Contains the **C.O.S.E** web-app source code. COSE is a Web Application used along side a mysql Database to run an online store simulator, allowing the user to 'buy' and 'sell' digital items. 
+This repo Contains the **C.O.S.S web-app source code. COSS is a Web Application used along side a mysql Database to run an online store simulator, allowing the user to 'buy' and 'sell' digital items. 
 
 -----------------
 
