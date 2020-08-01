@@ -13,15 +13,15 @@ var db = {};
 
 // let createobj = require()
 
-if (config.use_env_variable) {
+// if (use_env_variable == DATABASE_URL) {
   var sequelize = new Sequelize(process.env.DATABASE_URL);
-} else {
-  var sequelize = new Sequelize('finalprojstore_db', 'root', 'Ss17091997', {
-    host: 'localhost',
-    port: '5000',
-    dialect:'mysql'
-  })
-};
+// } else {
+//   var sequelize = new Sequelize('finalprojstore_db', 'root', 'Ss17091997', {
+//     host: 'localhost',
+//     port: '5000',
+//     dialect:'mysql'
+//   })
+// };
 
 
 
