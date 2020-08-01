@@ -13,15 +13,21 @@ var db = {};
 
 // let createobj = require()
 
-// if (use_env_variable == DATABASE_URL) {
-  var sequelize = new Sequelize(process.env.DATABASE_URL);
-// } else {
-//   var sequelize = new Sequelize('finalprojstore_db', 'root', 'Ss17091997', {
-//     host: 'localhost',
-//     port: '5000',
-//     dialect:'mysql'
-//   })
-// };
+if (process.env.DATABASE_URL) {
+  var sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect:  'postgres',
+    protocol: 'postgres',
+    port:     match[4],
+    host:     match[3],
+    logging:  true //false
+  })
+} else {
+  var sequelize = new Sequelize('finalprojstore_db', 'root', 'Ss17091997', {
+    host: 'localhost',
+    port: '5000',
+    dialect:'mysql'
+  })
+};
 
 
 
