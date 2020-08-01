@@ -42,6 +42,7 @@ router.post('/api/newuser', function(req, res) {
   res.send(200, req.body);
   newuser = req.body
   console.log("Req: " + JSON.stringify(newuser));
+  
   db.create({
     user_name: `${newuser.user_name}`,
     user_password: newuser.user_password,
