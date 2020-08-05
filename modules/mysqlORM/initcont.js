@@ -3,23 +3,22 @@
 // var fs = require("fs");
 // var path = require("path");
 const { Sequelize, Model, DataTypes } = require('sequelize');
+
 // var basename = path.basename(module.filename);
 // var env = process.env.NODE_ENV || "development";
 // var config = require(__dirname + "/../config/config.json")[env];
 // const newbook = require('../server.js');
 // console.log("newbook in cont: " + newbook);
-const DATABASE_URL = 'postgres://mlijmmhvjxijve:d985111fbfd3e10d5395527fd0c95c34718008f5068fe9f9c98f087aba35ea31@ec2-34-225-162-157.compute-1.amazonaws.com:5432/d3nup472i70sq8'
+const DATABASE_URL = 'mysql://b3f5e07c7edcef:3f868844@eu-cdbr-west-03.cleardb.net/heroku_268f9e05866c229?reconnect=true'
 var db = {};
 
 // let createobj = require()
 
 if (process.env.DATABASE_URL) {
-  var sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialect:  'postgres',
-    protocol: 'postgres',
-    port:     match[4],
-    host:     match[3],
-    logging:  true //false
+  var sequelize = new Sequelize('heroku_268f9e05866c229', 'b3f5e07c7edcef', '3f868844', {
+    host: 'eu-cdbr-west-03.cleardb.net',
+    port: '3306',
+    dialect:'mysql'
   })
 } else {
   var sequelize = new Sequelize('finalprojstore_db', 'root', 'Ss17091997', {
@@ -28,31 +27,6 @@ if (process.env.DATABASE_URL) {
     dialect:'mysql'
   })
 };
-
-
-
-  var users = sequelize.define("users", {
-      // Id: { type: DataTypes.INTEGER, allowNull: false },
-      user_name: { type: DataTypes.STRING, allowNull: false },
-      user_password: { type: DataTypes.INTEGER, allowNull: false },
-      balance: { type: DataTypes.INTEGER, allowNull: false },
-    }, {
-        timestamps: false,
-  });
-
-// console.log(Books === sequelize.models.Books);
-
-// Createbook(bookobj => {
-//   Books.create(
-//     {title: booksobj.title},
-//     {authors: booksobj.authors},
-//     {discription: booksobj.discription},
-//     {image: booksobj.image},
-//     {link: booksobj.link}
-//   );
-// });
-
-
 
 async function testconnection() {
   try {
@@ -63,11 +37,11 @@ async function testconnection() {
   }
 }
 
-testconnection() 
+testconnection()
 
 // console.log("db: " + JSON.stringify(Books.findAll()));
 
-module.exports = users;
+module.exports = sequelize;
 
 
 

@@ -5,8 +5,8 @@ class usersAPI extends Component {
         super(props);
         this.state = {
           users: [{
-                  user_name: 'jemes',
-                  user_password: 3332,
+                  user_name: '',
+                  user_password: 0,
                   balance: 0,
           }]
 
@@ -16,25 +16,25 @@ class usersAPI extends Component {
         // this.handleSubmit = this.handleSubmit.bind(this);
       }
 
-      // componentDidMount() {
-      //   fetch("/api/login", {
-      //     mode: 'no-cors',
-      //     headers: {
-      //       'Content-Type': 'application/json'
-      //     }
-      //   })
-      //     .then(res => res.json())
-      //     .then(json => {
-      //       console.log("Fetch input: " + JSON.stringify(json));
-      //       // const result = res.json();
-      //       this.setState({
-      //         users: json.users
-      //       });
-      //     })
-      //     .catch(err => {
-      //       console.log(err);
-      //     })
-      //   }
+      componentDidMount() {
+        fetch("/api/login", {
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(res => res.json())
+          .then(json => {
+            console.log("Fetch input: " + JSON.stringify(json));
+            // const result = res.json();
+            this.setState({
+              users: json.users
+            });
+          })
+          .catch(err => {
+            console.log(err);
+          })
+        }
 
       // handleChange = (event) => {
       //   let nam = event.target.name;
