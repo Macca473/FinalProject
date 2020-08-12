@@ -1,0 +1,51 @@
+
+.Buttons {
+  position: relative;
+  display: grid;
+  margin: auto;
+  background-color: rgb(72, 119, 189);
+  border-radius: 25px;
+  width: 150px;
+  height: 50px;
+  color: aliceblue;
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: large;
+  align-content: center;
+  top: 23px;
+  transition: 0.3s;
+}
+
+.Buttons:hover {
+  background-color: rgb(142, 178, 231);
+}
+
+.Labwrap {
+  background-color: rgb(207, 207, 207);
+  position: relative;
+  display: grid;
+  margin: auto;
+  margin-top: 10px;
+  border-radius: 25px;
+  width: 250px;
+}
+
+.searchinput {
+  position: relative;
+  background-color: rgb(207, 207, 207);
+  color: rgb(51, 51, 51);
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: medium;
+  border: none;
+  margin: auto;
+  bottom: 0px;
+  width: 60%;
+}
+
+.labeltext {
+  position: relative;
+  color: rgb(51, 51, 51);
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: large;
+  left: 10px;
+}
+

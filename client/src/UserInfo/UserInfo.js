@@ -1,60 +1,103 @@
 import React, { Component } from 'react';
 
-// function Getuserinfo() {
-//   let getfetch = fetch("/api/login", {
-//     mode: 'no-cors',
+// async function thisFetch() {
+//   let output = {}
+//   await setTimeout(function(){
+//   return fetch("/api/userinfo", {
+//     mode: 'cors',
 //     headers: {
-//       'Content-Type': 'application/json'
-//     }
+//       'Content-Type': 'application/json;charset=utf-8'
+//     },
 //   })
-//     .then(res => res.json())
-//     .then(json => {
-//       this.setState = ({
-//         color: 'green'
+//   .then(response => response.json())
+//   .then(data => {
+//     console.log(data)
+//     output = data
 //   });
-//   return getfetch
-// })
+// }, 2000)
 
-// }
+// };
 
 class UserInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            color: 'old color'
-          }
-      
-      this.Getuserinfo = this.Getuserinfo.bind(this)
-    }
+          userinfo: {
+              userinv: [
+                  {
+                    amount: 0,
+                    user: {
+                      user_name: '',
+                      balance: 0
+                    },
+                    item: {
+                      item_name: '',
+                      cost: 0,
+                      popularity: 0,
+                      idealtod: 0,
+                      idealweather: 0,
+                      idealtemp: 0,
+                      item_image: ''
+                    }
+                  }
+              ]
+            },
+        }
+        this.Fetchuserinfo = this.Fetchuserinfo.bind(this);
+        this.Fetchuserinfo()
+      }
 
-      Getuserinfo() {
-        fetch("/api/login", {
-          mode: 'no-cors',
+      Fetchuserinfo() {
+        fetch("/api/userinfo", {
+          mode: 'cors',
           headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-        .then(res => res.json())
-        .then(json => {
-            this.setState = ({
-              color: 'green'
-         });
-         console.log("Fetching: " + JSON.stringify(json))
-      })
+            'Content-Type': 'application/json;charset=utf-8'
+          },
+          })
+          .then(function(result){
+            console.log(JSON.stringify(result))
+          })
+          // .then(json => {
+            
+            // this.setState({
+            //   userinfo: json
+            // })
+          // })
       }
 
-      componentDidMount() {
-        console.log('Mounting')
-        this.Getuserinfo()
-      }
+      // componentDidMount() {
 
+      //   const request = async () => {
+      //     const response = await fetch("/api/userinfo", {
+      //           mode: 'cors',
+      //             headers: {
+      //               'Content-Type': 'application/json;charset=utf-8'
+      //             },
+      //           })
+      //     const json = await response.json();
+      //     console.log(json);
+      //   }
+
+      //   fetch("/api/userinfo", {
+      //     mode: 'cors',
+      //     headers: {
+      //       'Content-Type': 'application/json;charset=utf-8'
+      //     },
+      //   })
+      //   .then(function(result){
+      //     console.log(result.all)
+      //     // this.setState({
+      //     //   userinfo: result
+      //     // })
+      //   });
+      // }
 
       // componentDidUpdate(prevProps) {
       //   // Typical usage (don't forget to compare props):
       //   let newfetch = JSON.stringify(FetchData)
       //   console.log("updating")
       //   if (newfetch !== prevProps) {
-      //     this.setstate = ({
+      //     this.setstate({
       //       userinfo: newfetch
       //     })
       //   }
@@ -80,7 +123,7 @@ class UserInfo extends Component {
 
           <div>
             <p>test</p>
-            <p>{this.state.color}</p>
+            <p>{this.state.userinfo.userinv[0].amount}</p>
           </div>
         )
       }

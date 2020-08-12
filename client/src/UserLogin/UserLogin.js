@@ -1,34 +1,20 @@
 import React, { Component } from 'react';
-
+import './UserLogin.css';
 import UserInfo from '../UserInfo/UserInfo.js'
 
-async function POSTFetch(data) {
-  let validate = false;
-  console.log("Data:" + JSON.stringify(data));
-  while (validate === false) {
-    await fetch('/api/login', {
-      mode: 'cors',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(data),
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log('Success:', data);
-      validate = true
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-    if (validate === true) {
-      console.log("validate is true");
-      return true
-    }
-  }
+function POSTFetch(data) {
+      return fetch('/api/login', {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(data),
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      })
 };
-
 
 class usersAPI extends Component {
           constructor(props) {
@@ -40,7 +26,7 @@ class usersAPI extends Component {
               //     isLoggedIn: false}
               isLoggedIn: false
           }
-        // this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         // this.handleSubmit = this.handleSubmit.bind(this);
         }
 
@@ -63,43 +49,37 @@ class usersAPI extends Component {
 
         console.log(JSON.stringify(newuser));
 
-        // console.log(POSTFetch(newuser))
-        
-        let postcheck = POSTFetch(newuser);
-
-        console.log("postcheck: " + postcheck);
-
-        this.setState({
-          isLoggedIn: postcheck
-        })       
+          POSTFetch(newuser).then(function(result){
+              console.log('result ', result)
+            }).then(
+              this.setState({
+                ...this.state,
+                isLoggedIn: true
+              })
+            )
       }
-
       render() {
 
           const isLoggedIn = this.state.isLoggedIn;
           if (isLoggedIn) {
-
-            return <UserInfo />;
+            return <UserInfo/>;
           }
             return (
               <div>
                       <form onSubmit={this.handleSubmit}>
-                        <label>
-                        Name:
-                        <input
-                            name="user_name"
-                            type="text"
-                        />
-                        </label>
-                    <br />
-                        <label>
-                        Password:
-                        <input
-                            name="user_password"
-                            type="number"
-                        />
-                        </label>
-                        <input type="submit" value="Login" />
+                        <div className='Labwrap'>
+                          <label className='labeltext'>
+                          Name:
+                          <input name="user_name" type="text" className='searchinput'/>
+                          </label>
+                        </div>
+                        <div className='Labwrap'>
+                          <label className='labeltext'>
+                          Password:
+                          <input name="user_password" type="number" className='searchinput'/>
+                          </label>
+                        </div>
+                        <input type="submit" value="Login" className='Buttons'/>
                     </form>
               </div>
             )

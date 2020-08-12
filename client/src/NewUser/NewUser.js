@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './NewUser.css'
 class usersAPI extends Component {
     constructor(props) {
         super(props);
@@ -98,24 +98,6 @@ class usersAPI extends Component {
           };
       }
 
-      
-      // componentDidUpdate() {
-      //   console.log("adding to push = " + JSON.stringify(newuser));
-      //   fetch("/api/users", {
-      //       method: 'POST',
-      //       mode: 'no-cors',
-      //       headers: {'Content-Type' : 'application/json'},
-      //       body: JSON.stringify(newuser)
-      //     })
-      //       .then(res => res.json())
-      //       // .then((data) =>      
-      //       //       this.setState({ postId: data.id})
-      //       // )
-      //       .catch((err)=> console.log(err))
-      //   // console.log("whats pushing " + JSON.stringify(this.state))
-      // }
-
-
       render() {
         const items = this.state.users;
         // console.log("state = " + JSON.stringify(this.state))
@@ -123,33 +105,21 @@ class usersAPI extends Component {
         return (
 
           <div>
-                  <form onSubmit={this.handleSubmit}>
-                    <label>
-                    Name:
-                    <input
-                        name="user_name"
-                        type="text"
-                        // name={this.state.value}
-                        onChange={this.handleChange} />
-                    </label>
-                <br />
-                    <label>
-                    Password:
-                    <input
-                        name="user_password"
-                        type="number"
-                        // password={this.state.value}
-                        onChange={this.handleChange} />
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
-                <ul>
-                  {items.map(item => (
-                  <li key={item.user_name}>
-                  {item.user_name}
-                  </li>
-                  ))}
-                </ul>
+                      <form onSubmit={this.handleSubmit}>
+                        <div className='Labwrap'>
+                          <label className='labeltext'>
+                          Name:
+                          <input name="user_name" type="text" className='searchinput'/>
+                          </label>
+                        </div>
+                        <div className='Labwrap'>
+                          <label className='labeltext'>
+                          Password:
+                          <input name="user_password" type="number" className='searchinput'/>
+                          </label>
+                        </div>
+                        <input type="submit" value="Create Account" className='Buttons'/>
+                    </form>
           </div>
         )
       }

@@ -4,6 +4,8 @@ const passport = require('./modules/mysqlORM/passport.js');
 const PORT = process.env.PORT || 3001;
 const app = express();
 const router = express.Router();
+const QueryUserInfo = require('./controllers/CurrentUserFun.js');
+const QueryUserinvInfo = require('./controllers/CurrentUserinvFun.js');
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -13,26 +15,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-
-
-
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
-
-const user = require('./modules/mysqlORM/user.js');
-
-const usersinv = require('./modules/mysqlORM/usersinv.js');
-
-const items = require('./modules/mysqlORM/items.js');
-
-
-items.hasMany(usersinv, {foreignKey: 'item_id'});
-
-usersinv.belongsTo(items, {foreignKey: 'item_id'});
-
-user.hasMany(usersinv, {foreignKey: 'user_id'});
-
-usersinv.belongsTo(user, {foreignKey: 'user_id'});
 
 // router.get('/api/login', function(req, res) {
 //   user.findAll()
@@ -49,7 +31,7 @@ usersinv.belongsTo(user, {foreignKey: 'user_id'});
 //   })
 // })
 
-let newuser = {};
+
 
 let userinfo = {};
 
@@ -57,68 +39,39 @@ let userinfo = {};
 //   res = {}
 // });
 
-router.post('/api/newuser', function(req, res) {
-  // req.body["id"] = 0;
-  res.send(200, req.body);
-  newuser = req.body
-  console.log("Req: " + JSON.stringify(newuser));
+// router.post('/api/newuser', function(req, res) {
+//   // req.body["id"] = 0;
+//   res.send(200, req.body);
+//   newuser = req.body
+//   // console.log("Req: " + JSON.stringify(newuser));
   
-  user.create({
-    user_name: `${newuser.user_name}`,
-    user_password: newuser.user_password,
-    balance: 10000,
-  })
-});
+//   user.create({
+//     user_name: `${newuser.user_name}`,
+//     user_password: newuser.user_password,
+//     balance: 10000,
+//   })
+// });
+
+let currentuserid = {};
 
 router.post('/api/login',
 passport.authenticate('local', { session: false }),
 function(req, res){
-  let currentuser = req.body.user_name;
-  
-  console.log("userlog: " + currentuser);
-  UserQuery();
-    function UserQuery() {
-      user.findOne({ where: {user_name: currentuser}})
-      .then(thisuser => {
-        let userid = thisuser.id;
-        console.log("User info: " + JSON.stringify(userid));
-        console.log("UserInv: " + UserInvQuery(userid))
-        userinfo = UserInvQuery(userid);
-      })
-    }
-    function UserInvQuery(userid) {
-      usersinv.findAll({
-        where: { user_id: { [Op.eq]: userid } },
-        attributes: ['amount'],
-        include: [{
-          model: user,
-          as: 'user',
-          attributes: ['user_name','balance']
-        },
-        {
-          model: items,
-          as: 'item',
-          attributes: ['item_name','cost','popularity','idealtod','idealweather','idealtemp','item_image']
-        }]
-      })
-      .then(thisuserinv => {
-        console.log(JSON.stringify({userinfo: thisuserinv}))
-        res.status(200).json({userinfo: thisuserinv});
-      })
-    }
-  })
+  // let currentuser = req.body.user_name;
+  // console.log("userlog: " + currentuser);
+  QueryUserInfo(req.body.user_name).then(function(result){
+    console.log("Post Data: " + JSON.stringify(result) + " " + typeof result);
+    res.status(200).json(result);
+    currentuserid = result
+   });
+})
 
-  .get('/api/login', function(req, res) {
-    testjson = {'color' : 'blue'}
-    res.status(200).json(testjson)
-    console.log("GettingData: " + JSON.stringify(testjson));
-  })
-
-
-  // router.get('/api/userinfo', function(req, res){
-
-  // })
-
+router.get('/api/userinfo', function(req, res) {
+ QueryUserinvInfo(currentuserid.id).then(function(result){
+  console.log("GettingData: " + JSON.stringify(result) + " " + typeof result);
+  res.status(200).send({'userinv': result})
+ });
+})
 
 // router.delete('/api/books/:id', function(req, res) {
 //   const id = req.params.id
@@ -157,5 +110,3 @@ app.get("*", (req, res) => {
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
-
-exports.newuser = newuser;
