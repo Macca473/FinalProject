@@ -104,7 +104,7 @@ class usersAPI extends Component {
         
         return (
 
-          <div>
+          <div className='outline'>    
                       <form onSubmit={this.handleSubmit}>
                         <div className='Labwrap'>
                           <label className='labeltext'>

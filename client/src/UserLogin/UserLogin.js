@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './UserLogin.css';
-import UserInfo from '../UserInfo/UserInfo.js'
+import Mainmenu from '../MainMenu/Mainmenu.js'
+
 
 function POSTFetch(data) {
       return fetch('/api/login', {
@@ -62,10 +63,10 @@ class usersAPI extends Component {
 
           const isLoggedIn = this.state.isLoggedIn;
           if (isLoggedIn) {
-            return <UserInfo/>;
+            return <Mainmenu/>; 
           }
             return (
-              <div>
+              <div className='outline'>
                       <form onSubmit={this.handleSubmit}>
                         <div className='Labwrap'>
                           <label className='labeltext'>

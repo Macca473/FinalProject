@@ -1,0 +1,117 @@
+.buffer {
+    width:auto;
+    height:auto;
+}
+
+.mainmenubuttons {
+    position: relative;
+    display: grid;
+    grid-template-columns: 25% 40% 35%;
+    top: 3vh;
+}
+
+.mainmenulogbuttons {
+    position: relative;
+    display: grid;
+    width: 10vw;
+    margin: auto;
+    top: -8px;
+}
+
+.shadow {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #004e72;
+    box-shadow: 5px 5px 10px #004b6e;
+}
+
+.itemscon {
+    position: relative;
+    border-style: solid;
+    height: 85vh;
+}
+
+.firstrow {
+    display: grid;
+    grid-template-columns: 24vw 24vw 24vw 24vw;
+}
+
+.otherows {
+    display: grid;
+    grid-template-rows: 80px 200px;
+    grid-template-columns: 10vw 20vw 40vw 30vw;
+}
+
+.buyitem {
+    height: 250px;
+    margin: 25px;
+    display: grid;
+    grid-template-rows: 80% 20%;
+}
+
+.buyimage {
+    margin: 5px;
+}
+
+.itemimage {
+    background-color: rgb(147, 215, 255);
+    width: 98%;
+    max-height: 180px;
+    border-style: solid;
+    border-radius: 10px 10px 0px 0px;
+    object-fit: contain; 
+}
+
+.buyinfo {
+    border-style: solid;
+    margin: 5px;
+    border-radius: 0px 0px 10px 10px;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5vh;
+    text-align: center;
+    background-color: rgb(147, 215, 255);
+}
+
+.iteminfo {
+    /* border-style: solid; */
+    position: relative;
+    top: 10px;
+}
+
+.textgreen {
+    color: rgb(0, 190, 16);
+}
+
+.textred {
+    color: red;
+}
+
+.buyamount {
+    position: relative;
+    top: -50px;
+    left: 49%;
+    background-color: rgb(139, 177, 247);
+    font-family: 'Orbitron', sans-serif;
+    width: 140px;
+    border-radius: 3px;
+    text-align: center;
+    border-style: solid;
+}
+
+.buyinput {
+    width: 40px;
+    margin: 4px;
+    border-radius: 0px 5px 5px 0px;
+    border-style: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: medium;
+}
+
+@media only screen and (max-width: 500px) {
+    .firstrow {
+        display: grid;
+        grid-template-columns: 100vw;
+    }
+  }

@@ -44,18 +44,14 @@ import NewUser from './NewUser/NewUser.js';
           
           <div className='background'>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@700&display=swap"></link>
-              <div className='outline'>
                 <NewUser/>
-              </div>
           </div>
           )
       } else if (redirectoption === 2){
           return (
           <div className='background'>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@700&display=swap"></link>
-              <div className='outline'>
                 <Login/>
-              </div>
           </div>
           )
       }

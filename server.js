@@ -7,6 +7,8 @@ const router = express.Router();
 const QueryUserInfo = require('./controllers/CurrentUserFun.js');
 const QueryUserinvInfo = require('./controllers/CurrentUserinvFun.js');
 
+const ModdedItemInfo = require('./controllers/WeatherAPI_ItemPref_Mix.js')
+
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -67,10 +69,14 @@ function(req, res){
 })
 
 router.get('/api/userinfo', function(req, res) {
- QueryUserinvInfo(currentuserid.id).then(function(result){
-  console.log("GettingData: " + JSON.stringify(result) + " " + typeof result);
-  res.status(200).send({'userinv': result})
- });
+//  QueryUserinvInfo(currentuserid.id).then(function(result){
+//   console.log("GettingData: " + JSON.stringify(result) + " " + typeof result);
+//   res.status(200).send({'userinv': result})
+//   });
+    ModdedItemInfo(currentuserid.id).then(function(result) {
+      console.log("GettingData: " + JSON.stringify(result) + " " + typeof result);
+      res.status(200).send({'userinv': result})
+    });
 })
 
 // router.delete('/api/books/:id', function(req, res) {

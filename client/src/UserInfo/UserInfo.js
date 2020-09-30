@@ -1,129 +1,119 @@
 import React, { Component } from 'react';
+import './Userinfo.css';
+import itemthingy from '../itemthingy/itemthingy.js'
 
-// async function thisFetch() {
-//   let output = {}
-//   await setTimeout(function(){
-//   return fetch("/api/userinfo", {
-//     mode: 'cors',
-//     headers: {
-//       'Content-Type': 'application/json;charset=utf-8'
-//     },
-//   })
-//   .then(response => response.json())
-//   .then(data => {
-//     console.log(data)
-//     output = data
-//   });
-// }, 2000)
+function plusminicon(boll) {
+  if (boll == 1)
+    {return '+'}
+  else
+    {return '-'}
+}
 
-// };
+function perscolor(boll) {
+  if (boll == 1)
+    {return 'textred'}
+  else
+    {return 'textgreen'}
+}
+
+function Items(itemsarr) {
+  return (
+    <div className="buyitem">
+        <div className="buyimage">
+            <img src={itemsarr.image} className="itemimage"></img>
+              <div className="buyamount">
+                <form>
+                      <label className='labeltext'>
+                      Quantity 
+                      <input name="user_name" type="number" className='buyinput'/>
+                      </label>
+                </form>
+              </div>
+        </div>
+        <div className="buyinfo">
+            <div className="iteminfo">
+                {itemsarr.name}
+            </div>
+            <div className="iteminfo">
+                ${itemsarr.MODcost}
+            </div>
+            <div className="iteminfo" className={perscolor(`${itemsarr.costPer}`.slice(0, 1))}>
+                {plusminicon(`${itemsarr.costPer}`.slice(0, 1))}
+                {`${itemsarr.costPer}`.slice(2, 4)}%
+            </div>
+        </div>
+    </div>
+  )
+}
+
+
+
+function FetchUserinfo() {
+  return fetch("/api/userinfo", {
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+  }
+
+setInterval(FetchUserinfo, 1000);
 
 class UserInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
           userinfo: {
-              userinv: [
+                userinv: [
                   {
-                    amount: 0,
-                    user: {
-                      user_name: '',
-                      balance: 0
-                    },
-                    item: {
-                      item_name: '',
-                      cost: 0,
-                      popularity: 0,
-                      idealtod: 0,
-                      idealweather: 0,
-                      idealtemp: 0,
-                      item_image: ''
-                    }
+                    Amount: 0,    
+                    name: '',
+                    owner: '',
+                    cost: 0.0,
+                    MODcost: 0.0,
+                    costPer: '0.00',
+                    popularity: 0,
+                    image: ''
                   }
-              ]
+                ]
             },
         }
-        this.Fetchuserinfo = this.Fetchuserinfo.bind(this);
-        this.Fetchuserinfo()
       }
 
-      Fetchuserinfo() {
-        fetch("/api/userinfo", {
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-          },
+      timer() {
+        FetchUserinfo()
+        .then(json => {
+            console.log("Fetch input: " + JSON.stringify(json));  
+            // if(this.state.chathis.length !== json.message.length) { 
+              console.log('userinfo updated');
+              // json.message.reverse();
+              this.setState({
+                userinfo: json
+              })
+            // } 
           })
-          .then(function(result){
-            console.log(JSON.stringify(result))
-          })
-          // .then(json => {
-            
-            // this.setState({
-            //   userinfo: json
-            // })
-          // })
+          .catch(err => {
+            console.log(err);
+        })
       }
 
-      // componentDidMount() {
-
-      //   const request = async () => {
-      //     const response = await fetch("/api/userinfo", {
-      //           mode: 'cors',
-      //             headers: {
-      //               'Content-Type': 'application/json;charset=utf-8'
-      //             },
-      //           })
-      //     const json = await response.json();
-      //     console.log(json);
-      //   }
-
-      //   fetch("/api/userinfo", {
-      //     mode: 'cors',
-      //     headers: {
-      //       'Content-Type': 'application/json;charset=utf-8'
-      //     },
-      //   })
-      //   .then(function(result){
-      //     console.log(result.all)
-      //     // this.setState({
-      //     //   userinfo: result
-      //     // })
-      //   });
-      // }
-
-      // componentDidUpdate(prevProps) {
-      //   // Typical usage (don't forget to compare props):
-      //   let newfetch = JSON.stringify(FetchData)
-      //   console.log("updating")
-      //   if (newfetch !== prevProps) {
-      //     this.setstate({
-      //       userinfo: newfetch
-      //     })
-      //   }
-      // }
-
-      // handleChange = (event) => {
-      //   let nam = event.target.name;
-      //   let val = event.target.value;
-      //   let newuser = `${[nam]}: ${val}`;
-      //   // return newuser;
-      //   // this.setState({
-      //   //   tmpbook: [
-      //   //       ...this.state,
-      //   //       newuser
-      //   //   ]
-      //   // });
-      //   console.log(newuser)
-      // }
+      componentDidMount() {
+        this.newMessageCheck = setInterval(this.timer.bind(this), 1000);
+      }
   
       render() {
-
+        const item = this.state.userinfo.userinv
         return (
 
           <div>
-            <p>test</p>
-            <p>{this.state.userinfo.userinv[0].amount}</p>
+              <div className="itemscon">
+            <div className="firstrow">
+                {item.map(function(object, inx){
+                    return <div> <Items key={inx} name={object.name} MODcost={object.MODcost} image={object.image} costPer={object.costPer}/> </div>
+                })}
+            </div>
+          </div>
           </div>
         )
       }
