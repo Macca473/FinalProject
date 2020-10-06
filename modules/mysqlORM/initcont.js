@@ -14,19 +14,19 @@ var db = {};
 
 // let createobj = require()
 
-if (process.env.DATABASE_URL) {
+// if (process.env.DATABASE_URL) {
   var sequelize = new Sequelize('heroku_268f9e05866c229', 'b3f5e07c7edcef', '3f868844', {
     host: 'eu-cdbr-west-03.cleardb.net',
     port: '3306',
     dialect:'mysql'
   })
-} else {
-  var sequelize = new Sequelize('finalprojstore_db', 'root', 'Ss17091997', {
-    host: 'localhost',
-    port: '5000',
-    dialect:'mysql'
-  })
-};
+// } else {
+//   var sequelize = new Sequelize('finalprojstore_db', 'root', 'Ss17091997', {
+//     host: 'localhost',
+//     port: '5000',
+//     dialect:'mysql'
+//   })
+// };
 
 async function testconnection() {
   try {
