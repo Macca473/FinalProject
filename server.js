@@ -4,6 +4,8 @@ const passport = require('./modules/mysqlORM/passport.js');
 const PORT = process.env.PORT || 3001;
 const app = express();
 const router = express.Router();
+const helmet = require('helmet');
+
 const QueryUserInfo = require('./controllers/CurrentUserFun.js');
 const QueryUserinvInfo = require('./controllers/CurrentUserinvFun.js');
 
@@ -16,6 +18,7 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
 
 
 // router.get('/api/login', function(req, res) {
@@ -101,6 +104,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(router);
+app.use(helmet());
 
 
 
